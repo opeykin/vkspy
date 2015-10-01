@@ -6,8 +6,10 @@ fun main(args: Array<String>) {
     val idsSource = IdsSource()
     val statusLogger = StatusLogger()
 
-    val ids = idsSource.get()
-    val response = accessor.checkOnline(ids)
-    val statuses = parser.parseOnline(response)
-    statusLogger.log(statuses)
+    kotlin.concurrent.timer("MyTimer", false, 0, 5000, {
+        val ids = idsSource.get()
+        val response = accessor.checkOnline(ids)
+        val statuses = parser.parseOnline(response)
+        statusLogger.log(statuses)
+    });
 }
