@@ -1,0 +1,4 @@
+#!/bin/sh
+
+psql < drop_tables.sql 
+psql < create_tables.sql
