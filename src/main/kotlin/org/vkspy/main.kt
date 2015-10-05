@@ -8,8 +8,8 @@ fun main(args: Array<String>) {
 
     kotlin.concurrent.timer("MyTimer", false, 0, 5000, {
         val ids = idsSource.get()
-        val response = accessor.checkOnline(ids)
-        val statuses = parser.parseOnline(response)
-        statusLogger.log(statuses)
+        val json = accessor.checkOnline(ids)
+        val response = parser.parseOnline(json)
+        statusLogger.log(response)
     });
 }
