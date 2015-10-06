@@ -1,15 +1,16 @@
 CREATE TABLE Users(
-  Uid           INT             PRIMARY KEY NOT NULL,
-  FirstName     VARCHAR(25)     NOT NULL,
-  LastName      VARCHAR(25)     NOT NULL,
-  AddTime       TIMESTAMP       NOT NULL
+  uid            INT             PRIMARY KEY NOT NULL,
+  first_name     VARCHAR(25)     NOT NULL,
+  last_name      VARCHAR(25)     NOT NULL,
+  add_time       TIMESTAMP       NOT NULL
 );
 
 
 CREATE TABLE Stats(
-  Id            SERIAL      PRIMARY KEY NOT NULL,
-  Uid           INT         REFERENCES Users (Uid),
-  Online        BOOLEAN     NOT NULL,
-  Mobile        BOOLEAN     NOT NULL,
-  Time          TIMESTAMP   NOT NULL
+  id            SERIAL      PRIMARY KEY NOT NULL,
+  uid           INT         REFERENCES Users (uid),
+  online        BOOLEAN     NOT NULL,
+  mobile        BOOLEAN     NOT NULL,
+  app           INT         NOT NULL,
+  time          TIMESTAMPTZ NOT NULL
 );
