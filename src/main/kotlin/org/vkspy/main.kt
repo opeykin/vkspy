@@ -1,17 +1,32 @@
 package org.vkspy
 
-fun main(args: Array<String>) {
-    val accessor = VkAccessor()
-    val parser = VkParser()
-    val idsSource = IdsSource()
-    val dbWriter = DBWriter()
-    var responseLogger = ResponseLogger()
+import org.slf4j.LoggerFactory
 
-    kotlin.concurrent.timer("MyTimer", false, 0, 5000, {
-        val ids = idsSource.get()
-        val json = accessor.checkOnline(ids)
-        val response = parser.parseOnline(json)
-        dbWriter.write(response)
-        responseLogger.log(response)
-    });
+fun main(args: Array<String>) {
+    val logger = LoggerFactory.getLogger("main");
+
+    try {
+        val accessor = VkAccessor()
+        val parser = VkParser()
+        val idsSource = IdsSource()
+        val dbWriter = DBWriter()
+
+        kotlin.concurrent.timer("MyTimer", false, 0, 5000, {
+            try {
+                val ids = idsSource.get()
+                val json = accessor.checkOnline(ids)
+                val response = parser.parseOnline(json)
+                dbWriter.write(response)
+                logger.trace("OnTimer", response)
+            } catch (ex: Exception) {
+                logger.error("Timer", ex)
+                throw ex
+            }
+        });
+
+
+    } catch (ex: Exception) {
+        logger.error("Initialization", ex)
+        throw ex
+    }
 }
