@@ -1,8 +1,8 @@
 <?php
 
 $config = array(
-    "db1" => array(
-        "dbname" => "alex",
+    "db" => array(
+        "name" => "alex",
         "username" => "vkspy_stat_collector",
         "password" => "password",
         "host" => "localhost",

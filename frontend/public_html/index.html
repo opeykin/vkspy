@@ -3,6 +3,25 @@
 <head>
     <meta charset="UTF-8">
 </head>
+
+<script>
+    function getUserInfo() {
+        var uidInput = document.getElementById("uidInput");
+        var infoOutput = document.getElementById("userInfoOutput");
+        infoOutput.innerHTML = uidInput.value;
+    }
+</script>
+
 <body>
+
+<form id="uidForm" action="report.php" method="get">
+    Id: <input id="uidInput" type="text" name="uid"> <br>
+    <input type="submit" value="Submit">
+</form>
+
+<button onclick="getUserInfo()">Get info</button>
+
+<p id="userInfoOutput"></p>
+
 </body>
 </html>
