@@ -9,15 +9,16 @@ $config = array(
         "port" => 5432
     ),
     "urls" => array(
-    "baseUrl" => "http://vkspy.info"
+        "baseUrl" => "http://vkspy.info",
+        "vkUsers" => "https://api.vk.com/method/users.get?uids="
     ),
     "paths" => array(
-    "resources" => "/path/to/resources",
-    "images" => array(
-        "content" => $_SERVER["DOCUMENT_ROOT"] . "/images/content",
-        "layout" => $_SERVER["DOCUMENT_ROOT"] . "/images/layout"
+        "resources" => "/path/to/resources",
+        "images" => array(
+            "content" => $_SERVER["DOCUMENT_ROOT"] . "/images/content",
+            "layout" => $_SERVER["DOCUMENT_ROOT"] . "/images/layout"
+        )
     )
-)
 );
 
 

@@ -11,10 +11,10 @@ require('../resources/config.php');
 require('util/connection.php');
 require('util/prettyPrint.php');
 
-$uid = filter_input(INPUT_GET, 'uid', FILTER_SANITIZE_STRING);
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
 $pdo = connect($config);
 
-$userResult = $pdo->query("SELECT * FROM users WHERE uid=$uid");
+$userResult = $pdo->query("SELECT * FROM users WHERE uid=$id");
 
 if (!$userResult) {
     echo "uid is just wrong";
@@ -29,7 +29,7 @@ if (count($res) === 0) {
 }
 
 
-$statsResult = $pdo->query("SELECT * FROM stats WHERE uid=$uid");
+$statsResult = $pdo->query("SELECT * FROM stats WHERE uid=$id");
 $rows = array('online', 'time');
 printTable($statsResult, $rows);
 
