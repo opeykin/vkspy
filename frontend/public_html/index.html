@@ -5,18 +5,35 @@
 </head>
 
 <script>
-    function getUserInfo() {
-        var uidInput = document.getElementById("uidInput");
+    function httpGetAsync(url, callback) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                callback(xmlHttp.responseText);
+        };
+        xmlHttp.open("GET", url, true); // true for asynchronous
+        xmlHttp.send(null);
+    }
+
+    function displayData(data) {
+        var user = JSON.parse(data).response[0];
         var infoOutput = document.getElementById("userInfoOutput");
-        infoOutput.innerHTML = uidInput.value;
+        infoOutput.innerHTML = 'uid: ' + user.uid + '<br>' +
+                'First: ' + user.first_name + '<br>' +
+                'Last: ' + user.last_name + '<br>';
+    }
+
+    function getUserInfo() {
+        var uidText = document.forms['uidForm']['uid'].value;
+        var url = "https://api.vk.com/method/users.get?uids=" + uidText +"&fields=online";
+        httpGetAsync(url, displayData);
     }
 </script>
 
 <body>
 
 <form id="uidForm" action="report.php" method="get">
-    Id: <input id="uidInput" type="text" name="uid"> <br>
-    <input type="submit" value="Submit">
+    Id: <input type="search" name="uid" value="7860407"> <br>
 </form>
 
 <button onclick="getUserInfo()">Get info</button>
