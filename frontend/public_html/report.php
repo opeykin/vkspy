@@ -11,7 +11,8 @@ require('../resources/config.php');
 require('util/connection.php');
 require('util/prettyPrint.php');
 
-$uid = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+$uid = filter_input(INPUT_GET, "uid", FILTER_SANITIZE_STRING);
+echo "uid: " . $uid;
 $db = new VkSpyDb($config);
 
 if (!$db->hasUid($uid)) {

@@ -18,8 +18,9 @@ if (property_exists($response, "error") || count($response->response) === 0) {
 $uid = $response->response[0]->uid;
 $db = new VkSpyDb($config);
 if ($db->hasUid($uid)) {
-    header("Location: /report.php?id=" . $uid, true);
+    header("Location: /report.php?uid=" . $uid, true);
     die();
 }
 
-echo "no such id in database";
+header("Location: /addId.php?uid=" . $uid, true);
+die();
