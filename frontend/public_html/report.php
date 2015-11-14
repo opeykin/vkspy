@@ -11,27 +11,17 @@ require('../resources/config.php');
 require('util/connection.php');
 require('util/prettyPrint.php');
 
-$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
-$pdo = connect($config);
+$uid = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+$db = new VkSpyDb($config);
 
-$userResult = $pdo->query("SELECT * FROM users WHERE uid=$id");
-
-if (!$userResult) {
-    echo "uid is just wrong";
-    die();
-}
-
-$res = $userResult->fetchAll(PDO::FETCH_ASSOC);
-
-if (count($res) === 0) {
+if (!$db->hasUid($uid)) {
     echo "No such id in database";
     die();
 }
 
-
-$statsResult = $pdo->query("SELECT * FROM stats WHERE uid=$id");
+$stat = $db->getStat($uid);
 $rows = array('online', 'time');
-printTable($statsResult, $rows);
+printTable($stat, $rows);
 
 $pdo = null;
 ?>
