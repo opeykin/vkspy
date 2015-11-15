@@ -25,3 +25,10 @@ function printTable($data, $rows)
 
     echo "</table>\n";
 }
+
+function errorRedirectRoot($msg)
+{
+    echo "Error: " . $msg;
+    header("Refresh:3; url=/", true);
+    exit();
+}

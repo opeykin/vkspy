@@ -2,21 +2,20 @@
 
 require("../resources/config.php");
 require("util/connection.php");
+require("util/VkApi.php");
+require("util/misc.php");
 
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
 
-$url = $config["urls"]["vkUsers"] . $id;
-$responseText = file_get_contents($url);
-$response = json_decode($responseText);
+$user = VkApi::getUser($id);
 
-if (property_exists($response, "error") || count($response->response) === 0) {
-    echo "Error: invalid id";
-    header("Refresh:3; url=/", true);
-    die();
+if (!$user) {
+    errorRedirectRoot("invalid id");
 }
 
-$uid = $response->response[0]->uid;
+$uid = $user->uid;
 $db = new VkSpyDb($config);
+
 if ($db->hasUid($uid)) {
     header("Location: /report.php?uid=" . $uid, true);
     die();

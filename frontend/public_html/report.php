@@ -9,7 +9,7 @@
 
 require('../resources/config.php');
 require('util/connection.php');
-require('util/prettyPrint.php');
+require('util/misc.php');
 
 $uid = filter_input(INPUT_GET, "uid", FILTER_SANITIZE_STRING);
 echo "uid: " . $uid;
