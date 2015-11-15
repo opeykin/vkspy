@@ -8,13 +8,13 @@
 <?php
 
 require('../resources/config.php');
-require('util/connection.php');
+require('util/VkSpyDb.php');
 require('util/misc.php');
 
-$pdo = connect($config);
 
+$db = new VkSpyDb($config);
+$result = $db->getAllUsers();
 $rows = array('uid', 'first_name', 'last_name', 'add_time');
-$result = $pdo->query('SELECT * FROM users');
 
 printTable($result, $rows);
 

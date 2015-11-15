@@ -2,17 +2,6 @@
 
 require('SafePDO.php');
 
-function connect($config)
-{
-    $db = $config['db'];
-    $host = $db['host'];
-    $dbname = $db['name'];
-    $port = $db['port'];
-    $username = $db['username'];
-    $password = $db['password'];
-    return new SafePDO("pgsql:host=$host port=$port dbname=$dbname", $username, $password);
-}
-
 class VkSpyDb
 {
     private $pdo;
@@ -48,5 +37,10 @@ class VkSpyDb
     public function getStat($uid)
     {
         return $this->pdo->query("SELECT * FROM stats WHERE uid=$uid");
+    }
+
+    public function getAllUsers()
+    {
+        return $this->pdo->query("SELECT * FROM users");
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 require("../resources/config.php");
-require("util/connection.php");
+require("util/VkSpyDb.php");
 require("util/VkApi.php");
 require("util/misc.php");
 
