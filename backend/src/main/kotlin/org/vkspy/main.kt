@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
                 val json = accessor.checkOnline(ids)
                 val response = parser.parseOnline(json)
                 dbWriter.write(response)
-                logger.trace("OnTimer", response)
+                logger.info("Got ${response.response.size} statuses")
             } catch (ex: Exception) {
                 logger.error("Timer", ex)
                 throw ex
