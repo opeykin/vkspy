@@ -16,10 +16,9 @@ if (!$user) {
 $uid = $user->uid;
 $db = new VkSpyDb($config);
 
-if ($db->hasUid($uid)) {
-    header("Location: /report.php?uid=" . $uid, true);
-    die();
+if (!$db->hasUid($uid)) {
+    $db->addUser($user);
 }
 
-header("Location: /addId.php?uid=" . $uid, true);
+header("Location: /report.php?uid=" . $uid, true);
 die();

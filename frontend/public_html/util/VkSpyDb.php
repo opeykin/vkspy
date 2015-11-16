@@ -43,4 +43,10 @@ class VkSpyDb
     {
         return $this->pdo->query("SELECT * FROM users");
     }
+
+    public function addUser($user)
+    {
+        $statement = "INSERT INTO users VALUES ({$user->uid}, '{$user->first_name}', '{$user->last_name}', now());";
+        return $this->pdo->exec($statement);
+    }
 }
