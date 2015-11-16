@@ -21,7 +21,7 @@ if (!$db->hasUid($uid)) {
 }
 
 $stat = $db->getStat($uid);
-$rows = array('online', 'time');
+$rows = array('mobile', 'time');
 printTable($stat, $rows);
 
 $pdo = null;

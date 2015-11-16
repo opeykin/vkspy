@@ -9,7 +9,6 @@ CREATE TABLE Users(
 CREATE TABLE Stats(
   id            SERIAL      PRIMARY KEY NOT NULL,
   uid           INT         REFERENCES Users (uid),
-  online        BOOLEAN     NOT NULL,
   mobile        BOOLEAN     NOT NULL,
   app           INT         NOT NULL,
   time          TIMESTAMPTZ NOT NULL

@@ -28,7 +28,7 @@ public class DBWriter {
     }
 
     private fun createInsertRequest(s: OnlineStatus): String {
-        return "INSERT INTO stats (uid, online, mobile, app, time) values (" +
-                "${s.uid}, ${s.online.toBoolean()}, ${s.online_mobile.toBoolean()}, ${s.online_app}, now());"
+        return "INSERT INTO stats (uid, mobile, app, time) values (" +
+                "${s.uid}, ${s.online_mobile.toBoolean()}, ${s.online_app}, now());"
     }
 }
