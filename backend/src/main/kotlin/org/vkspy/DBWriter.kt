@@ -14,7 +14,7 @@ public class DBWriter {
 
     public fun write(response: OnlineResponse) {
         try {
-            response.response.forEach { write(it) }
+            response.response.filter { it.online != 0 }.forEach { write(it) }
         } catch (ex: Exception) {
             connection.close()
         }
