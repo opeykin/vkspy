@@ -7,10 +7,10 @@ public class VkAccessor {
     }
 
     fun checkOnline(ids: List<String>): String {
-        if (ids.size() > 1000)
+        if (ids.size > 1000)
             throw Exception("too match ids. 1000 is limit")
 
-        var url = createOnlineRequestUrl(ids.join(","))
+        var url = createOnlineRequestUrl(ids.joinToString(","))
         return Data.httpClient.executeGet(url)
     }
 
