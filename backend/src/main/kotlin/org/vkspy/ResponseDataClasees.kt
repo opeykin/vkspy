@@ -1,8 +1,5 @@
 package org.vkspy
 
-import java.time.LocalDateTime
-import kotlin.properties.Delegates
-
 data class OnlineStatus(val uid: Int,
                         val first_name: String,
                         val last_name: String,
@@ -12,5 +9,4 @@ data class OnlineStatus(val uid: Int,
                         val online_app: Int = 0)
 
 data class OnlineResponse(val response: Collection<OnlineStatus>) {
-    var dateTimeUTC: LocalDateTime by Delegates.notNull()
 }

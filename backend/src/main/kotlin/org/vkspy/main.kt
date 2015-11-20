@@ -8,16 +8,15 @@ fun main(args: Array<String>) {
     try {
         val accessor = VkAccessor()
         val parser = VkParser()
-        val idsSource = IdsSource()
-        val dbWriter = DBWriter()
+        val db = VkSpyDb()
 
         kotlin.concurrent.timer("MyTimer", false, 0, 5000, {
             try {
-                val ids = idsSource.get()
+                val ids = arrayListOf("opeykin", "alexey.kudinkin", "69283593")
                 val json = accessor.checkOnline(ids)
-                val response = parser.parseOnline(json)
-                dbWriter.write(response)
-                logger.info("Got ${response.response.size} statuses")
+                val statuses = parser.parseOnline(json)
+                db.writeStatuses(statuses)
+                logger.info("Got ${statuses.size} statuses")
             } catch (ex: Exception) {
                 logger.error("Timer", ex)
                 throw ex

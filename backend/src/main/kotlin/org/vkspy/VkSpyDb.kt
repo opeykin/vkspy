@@ -2,7 +2,7 @@ package org.vkspy
 
 import java.sql.DriverManager
 
-public class DBWriter {
+public class VkSpyDb {
     private object Const {
         val url = "jdbc:postgresql://localhost:5432/alex"
         val username = "vkspy_stat_collector"
@@ -12,15 +12,15 @@ public class DBWriter {
     //TODO: we do not close connection for now...
     val connection = DriverManager.getConnection(Const.url, Const.username, Const.password)
 
-    public fun write(response: OnlineResponse) {
+    public fun writeStatuses(statuses: Collection<OnlineStatus>) {
         try {
-            response.response.filter { it.online != 0 }.forEach { write(it) }
+            statuses.filter { it.online != 0 }.forEach { writeStatus(it) }
         } catch (ex: Exception) {
             connection.close()
         }
     }
 
-    private fun write(status: OnlineStatus) {
+    private fun writeStatus(status: OnlineStatus) {
         val statement = connection.createStatement()
         var sql = createInsertRequest(status)
         statement.executeUpdate(sql)
