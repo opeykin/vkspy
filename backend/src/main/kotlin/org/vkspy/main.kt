@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
 
         kotlin.concurrent.timer("MyTimer", false, 0, 5000, {
             try {
-                val ids = arrayListOf("opeykin", "alexey.kudinkin", "69283593")
+                val ids = db.getUserIds()
                 val json = accessor.checkOnline(ids)
                 val statuses = parser.parseOnline(json)
                 db.writeStatuses(statuses)

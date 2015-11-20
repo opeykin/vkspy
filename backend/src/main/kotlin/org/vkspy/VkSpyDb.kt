@@ -12,6 +12,19 @@ public class VkSpyDb {
     //TODO: we do not close connection for now...
     val connection = DriverManager.getConnection(Const.url, Const.username, Const.password)
 
+    fun getUserIds(): Collection<Int> {
+        val statement = connection.createStatement();
+        val result = statement.executeQuery("SELECT uid FROM users")
+
+        val list = arrayListOf<Int>()
+
+        while (result.next()) {
+            list.add(result.getInt("uid"));
+        }
+
+        return list;
+    }
+
     public fun writeStatuses(statuses: Collection<OnlineStatus>) {
         try {
             statuses.filter { it.online != 0 }.forEach { writeStatus(it) }

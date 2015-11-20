@@ -6,7 +6,7 @@ public class VkAccessor {
         val apiUrl = "https://api.vk.com/method/"
     }
 
-    fun checkOnline(ids: List<String>): String {
+    fun checkOnline(ids: Collection<Int>): String {
         if (ids.size > 1000)
             throw Exception("too match ids. 1000 is limit")
 
