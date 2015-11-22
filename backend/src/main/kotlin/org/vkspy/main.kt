@@ -1,6 +1,7 @@
 package org.vkspy
 
 import org.slf4j.LoggerFactory
+import org.vkspy.util.Config
 
 fun main(args: Array<String>) {
     val logger = LoggerFactory.getLogger("main");
@@ -8,9 +9,9 @@ fun main(args: Array<String>) {
     try {
         val accessor = VkAccessor()
         val parser = VkParser()
-        val db = VkSpyDb()
+        val db = newVkSpyDb(Config.DbUrl, Config.DbUserName, Config.DbPassword)
 
-        kotlin.concurrent.timer("MyTimer", false, 0, 5000, {
+        kotlin.concurrent.timer("MyTimer", false, 0, Config.TimerSpan, {
             try {
                 val ids = db.getUserIds()
                 val json = accessor.checkOnline(ids)

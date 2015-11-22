@@ -1,17 +1,10 @@
 package org.vkspy
 
+import org.vkspy.util.toBoolean
+import java.sql.Connection
 import java.sql.DriverManager
 
-public class VkSpyDb {
-    private object Const {
-        val url = "jdbc:postgresql://localhost:5432/alex"
-        val username = "vkspy_stat_collector"
-        val password = "password"
-    }
-
-    //TODO: we do not close connection for now...
-    val connection = DriverManager.getConnection(Const.url, Const.username, Const.password)
-
+public class VkSpyDb(val connection: Connection) {
     fun getUserIds(): Collection<Int> {
         val statement = connection.createStatement();
         val result = statement.executeQuery("SELECT uid FROM users")
@@ -44,4 +37,9 @@ public class VkSpyDb {
         return "INSERT INTO stats (uid, mobile, app, time) values (" +
                 "${s.uid}, ${s.online_mobile.toBoolean()}, ${s.online_app}, now());"
     }
+}
+
+fun newVkSpyDb(url: String, userName: String, password: String): VkSpyDb {
+    val connection = DriverManager.getConnection(url, userName, password)
+    return VkSpyDb(connection)
 }
