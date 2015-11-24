@@ -24,7 +24,9 @@ $rowCount = count($stat);
 
 $arr = array();
 
-for ($i = 0; $i < $rowCount; $i++) {
+$i = 0;
+$j = 0;
+while ($i < $rowCount) {
     $j = $i + 1;
     while ($j < $rowCount && datesAreClose($stat[$j - 1], $stat[$j], 120)) {
         $j++;
