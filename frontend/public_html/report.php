@@ -51,7 +51,12 @@ $db = null;
             for (var i = 0; i < dataJson.length; ++i) {
                 var entry = dataJson[i];
                 var date = new Date(entry.date);
-//                data.addRow([date, [date.getHours(), date.getMinutes(), date.getSeconds()]]);
+
+                date.setHours(0);
+                date.setMinutes(0);
+                date.setSeconds(0);
+                date.setMilliseconds(0);
+
                 data.addRow([date, entry.duration]);
             }
 
