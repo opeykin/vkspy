@@ -38,13 +38,22 @@ function parsePostgreDate($date)
     return DateTime::createFromFormat('Y-m-d H:i:s.uP', $date);
 }
 
-function dateIntervalInSeconds($dateStr1, $dateStr2)
+function dateIntervalInSeconds($date1, $date2)
 {
-    $date1 = parsePostgreDate($dateStr1);
-    $date2 = parsePostgreDate($dateStr2);
-
     $interval = $date1->diff($date2);
     return date_create('@0')->add($interval)->getTimestamp();
 }
+
+function sameDay($date1, $date2)
+{
+    $format = "Y-m-d";
+    return $date1->format($format) === $date2->format($format);
+}
+
+function datesAreClose($date1, $date2, $diffSeconds)
+{
+    return dateIntervalInSeconds($date1, $date2) < $diffSeconds;
+}
+
 
 
