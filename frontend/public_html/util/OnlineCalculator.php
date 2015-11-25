@@ -36,7 +36,7 @@ class OnlineCalculator
 
     private function addToSession($date)
     {
-        if (datesAreClose($this->currentDate, $date, 120)) {
+        if (sameDay($this->currentDate, $date) && datesAreClose($this->currentDate, $date, 120)) {
             $this->currentDate = $date;
             return true;
         }
