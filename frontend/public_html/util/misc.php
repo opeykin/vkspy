@@ -33,6 +33,13 @@ function errorRedirectRoot($msg)
     exit();
 }
 
+function errorJsonResponseAndDie($error_msg)
+{
+    $json = json_encode(array("error" => array("reason" => $error_msg)));
+    echo $json;
+    die();
+}
+
 function parsePostgreDate($date)
 {
     return DateTime::createFromFormat('Y-m-d H:i:s.uP', $date);
@@ -53,6 +60,12 @@ function sameDay($date1, $date2)
 function datesAreClose($date1, $date2, $diffSeconds)
 {
     return dateIntervalInSeconds($date1, $date2) < $diffSeconds;
+}
+
+function toPHPTimeZone($timeZoneOffset)
+{
+    $timeZone = 'Etc/GMT'.($timeZoneOffset <= 0 ? '+' : '').(-$timeZoneOffset);
+    return timezone_open($timeZone);
 }
 
 
