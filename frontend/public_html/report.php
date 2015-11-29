@@ -59,27 +59,29 @@ $db = null;
 
             var data = new google.visualization.DataTable();
             data.addColumn('date', 'Date');
-            data.addColumn('number', 'Duration');
+            data.addColumn('timeofday', 'Duration');
 
             for (var i = 0; i < response.length; ++i) {
                 var entry = response[i];
+
                 var date = new Date(entry.date);
 
-                // TODO: change timezone here. date is in UTC
-                date.setHours(0);
-                date.setMinutes(0);
-                date.setSeconds(0);
-                date.setMilliseconds(0);
+                var hours = Math.floor(entry.duration / 3600);
+                var minutes = Math.floor((entry.duration - hours * 3600) / 60);
 
-                data.addRow([date, entry.duration]);
+                data.addRow([date, [hours, minutes, 0]]);
             }
 
-            var options = {
-                title: 'Online statistics',
-                hAxis: {title: 'Date'},
-                vAxis: {title: 'Time'},
-                legend: 'none'
-            };
+            var options = google.charts.Bar.convertOptions({
+                hAxis: {
+                    format: 'd/MMM/yy',
+                    gridlines: {color: 'none'},
+                },
+                vAxis: {
+                    minValue: 0,
+                    format: 'H:mm'
+                }
+            });
 
             var chart = new google.charts.Bar(document.getElementById('chart_div'));
 
