@@ -36,7 +36,7 @@ class VkSpyDb
 
     public function getStat($uid)
     {
-        return $this->pdo->query("SELECT * FROM stats WHERE uid=$uid");
+        return $this->pdo->query("SELECT * FROM stats WHERE uid=$uid ORDER BY time");
     }
 
     public function getAllUsers()
