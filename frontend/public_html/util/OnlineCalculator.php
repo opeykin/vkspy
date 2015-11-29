@@ -12,7 +12,7 @@ class OnlineCalculator
     private function closeSession()
     {
         $this->dayDuration += $this->GetCurrentSessionDuration();
-        $this->sessionFirstDate = 0;
+        $this->sessionFirstDate = false;
     }
 
     private function closeDay()
@@ -20,6 +20,9 @@ class OnlineCalculator
         $date = $this->dayFirstDate->getTimestamp() * 1000;
         $entry = array("date" => $date, "duration" => $this->dayDuration);
         $this->result[] = $entry;
+
+        $this->dayFirstDate = false;
+        $this->dayDuration = false;
     }
 
     private function addToDay($date)
@@ -67,6 +70,12 @@ class OnlineCalculator
 
     public function getResult()
     {
+        if ($this->sessionFirstDate)
+            $this->closeSession();
+
+        if ($this->dayFirstDate)
+            $this->closeDay();
+
         return $this->result;
     }
 
