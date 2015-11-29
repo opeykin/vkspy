@@ -33,7 +33,6 @@ foreach ($db->getStat($uid) as $value) {
 
 $arr = $calculator->getResult();
 
-$json = json_encode($arr);
-echo $json;
+echo json_encode(array("response" => $arr));
 
 $db = null;
