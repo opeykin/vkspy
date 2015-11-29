@@ -42,11 +42,16 @@ $db = null;
             httpGet(url, callback);
         }
 
+        function getTimeZone() {
+            return -Math.floor(new Date().getTimezoneOffset() / 60);
+        }
+
         google.load("visualization", "1", {packages:["bar"]});
         google.setOnLoadCallback(loadDataAndDrawChart);
 
         function loadDataAndDrawChart() {
-            loadDailyUsageData(uid, "3", drawChart);
+            var timeZone = getTimeZone();
+            loadDailyUsageData(uid, timeZone, drawChart);
         }
 
         function drawChart(jsonResponse) {
