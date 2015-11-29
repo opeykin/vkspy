@@ -80,7 +80,8 @@ $db = null;
                 vAxis: {
                     minValue: 0,
                     format: 'H:mm'
-                }
+                },
+                legend: {position: 'none'}
             });
 
             var chart = new google.charts.Bar(document.getElementById('chart_div'));
