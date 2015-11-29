@@ -64,6 +64,9 @@ function datesAreClose($date1, $date2, $diffSeconds)
 
 function toPHPTimeZone($timeZoneOffset)
 {
+    if (!is_integer($timeZoneOffset))
+        return false;
+
     $timeZone = 'Etc/GMT'.($timeZoneOffset <= 0 ? '+' : '').(-$timeZoneOffset);
     return timezone_open($timeZone);
 }
