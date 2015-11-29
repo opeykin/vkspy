@@ -24,7 +24,7 @@
     }
 
     function getUserInfo() {
-        var uidText = document.forms['uidForm']['uid'].value;
+        var uidText = document.forms['idForm']['id'].value;
         var url = "https://api.vk.com/method/users.get?uids=" + uidText +"&fields=online";
         httpGetAsync(url, displayData);
     }
@@ -32,7 +32,7 @@
 
 <body>
 
-<form id="uidForm" action="checkId.php" method="get">
+<form id="idForm" action="checkId.php" method="get">
     Id: <input type="search" name="id" value="7860407"> <br>
 </form>
 
