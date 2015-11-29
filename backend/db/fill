@@ -1,3 +1,4 @@
 #!/bin/sh
 
-psql < fill.sql
+psql < users.sql
+psql < data.sql
