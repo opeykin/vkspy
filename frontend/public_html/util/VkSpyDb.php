@@ -22,7 +22,7 @@ class VkSpyDb
         $pdo = null;
     }
 
-    public function hasUid($uid)
+    public function getUser($uid)
     {
         $userResult = $this->pdo->query("SELECT * FROM users WHERE uid=$uid");
 
@@ -31,7 +31,15 @@ class VkSpyDb
         }
 
         $res = $userResult->fetchAll(PDO::FETCH_ASSOC);
-        return count($res) !== 0;
+        if (count($res) === 0)
+            return false;
+
+        return $res[0];
+    }
+
+    public function hasUid($uid)
+    {
+        return $this->getUser($uid) !== false;
     }
 
     public function getStat($uid)

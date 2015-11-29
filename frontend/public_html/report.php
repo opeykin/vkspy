@@ -8,11 +8,15 @@ require('util/misc.php');
 $uid = filter_input(INPUT_GET, "uid", FILTER_SANITIZE_STRING);
 $db = new VkSpyDb($config);
 
-if (!$db->hasUid($uid)) {
+$user = $db->getUser($uid);
+if (!$user) {
     errorRedirectRoot("No such id in database");
 }
 
-echo "<script>var uid = $uid;</script>";
+$firstName = $user["first_name"];
+$lastName = $user["last_name"];
+
+echo "<script>var uid = $uid; var firstName = '$firstName'; var lastName = '$lastName';</script>";
 
 $db = null;
 ?>
@@ -73,9 +77,10 @@ $db = null;
             }
 
             var options = google.charts.Bar.convertOptions({
+                title: "vk.com daily usage statistics for " + firstName + " " + lastName,
                 hAxis: {
                     format: 'd/MMM/yy',
-                    gridlines: {color: 'none'},
+                    gridlines: {color: 'none'}
                 },
                 vAxis: {
                     minValue: 0,
