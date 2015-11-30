@@ -1,0 +1,26 @@
+.centered {
+    display: block;
+    margin: 0 auto;
+}
+
+input.id_search_box {
+    width: 500px;
+    height: 26px;
+    font-size: 16px;
+    border: thin solid lightgray;
+    padding: 8px;
+    font-family: sans-serif;
+    margin-top: 10px;
+}
+
+input.id_search_box:focus {
+    outline-width: 0;
+    border: thin solid #4d76a4;
+}
+
+.v_centered_child {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+}

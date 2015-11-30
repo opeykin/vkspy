@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 
 <script>
@@ -31,14 +32,13 @@
 </script>
 
 <body>
+<div class="v_centered_child">
+    <img class="centered" src="img/logo_inverted.jpg" style="width: 300px">
 
-<form id="idForm" action="checkId.php" method="get">
-    Id: <input type="search" name="id" value="7860407"> <br>
-</form>
-
-<button onclick="getUserInfo()">Get info</button>
-
-<p id="userInfoOutput"></p>
+    <form id="idForm" action="checkId.php" method="get">
+        <input class="centered id_search_box" type="text" name="id" autofocus>
+    </form>
+</div>
 
 </body>
 </html>
