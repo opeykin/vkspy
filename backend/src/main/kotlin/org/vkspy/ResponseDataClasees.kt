@@ -6,7 +6,8 @@ data class OnlineStatus(val uid: Int,
                         val hidden: Int,
                         val online: Int,
                         val online_mobile: Int = 0,
-                        val online_app: Int = 0)
+                        val online_app: Int = 0,
+                        val deactivated: String? = null)
 
 data class OnlineResponse(val response: Collection<OnlineStatus>) {
 }
