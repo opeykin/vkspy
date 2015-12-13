@@ -1,32 +1,31 @@
 package org.vkspy
 
-import org.slf4j.LoggerFactory
 import org.vkspy.util.Config
+import org.vkspy.util.Logger
 
 fun main(args: Array<String>) {
-    val logger = LoggerFactory.getLogger("main");
-
     try {
         val accessor = VkAccessor()
         val parser = VkParser()
         val db = newVkSpyDb(Config.DbUrl, Config.DbUserName, Config.DbPassword)
 
         kotlin.concurrent.timer("MyTimer", false, 0, Config.TimerSpan, {
-            try {
-                val ids = db.getUserIds()
-                val json = accessor.checkOnline(ids)
-                val statuses = parser.parseOnline(json)
-                db.writeStatuses(statuses)
-                logger.trace("Got ${statuses.size} statuses")
-            } catch (ex: Exception) {
-                logger.error("Timer", ex)
-                throw ex
+            while (true) {
+                try {
+                    val ids = db.getUserIds()
+                    val json = accessor.checkOnline(ids)
+                    val statuses = parser.parseOnline(json)
+                    db.writeStatuses(statuses)
+                    Logger.get().trace("Got ${statuses.size} statuses")
+                } catch (e: Exception) {
+                    Logger.logException(e)
+                }
             }
         });
 
 
-    } catch (ex: Exception) {
-        logger.error("Initialization", ex)
-        throw ex
+    } catch (e: Exception) {
+        Logger.logException(e, "Initialization")
+        throw e
     }
 }
