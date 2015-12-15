@@ -4,7 +4,7 @@ import java.io.FileInputStream
 import java.util.*
 
 public object Config {
-    private val prop: Properties = readProperties("config.cfg")
+    private val prop: Properties = readProperties("resources/config.cfg")
 
     public val TimerSpan: Long = readLong("TimerSpan")
     public val DbUrl: String = readString("DbUrl")
