@@ -21,8 +21,9 @@ public class VkSpyDb(val connection: Connection) {
     public fun writeStatuses(statuses: Collection<OnlineStatus>) {
         try {
             statuses.filter { it.online != 0 }.forEach { writeStatus(it) }
-        } finally {
+        } catch(e: Exception) {
             connection.close()
+            throw e
         }
     }
 
