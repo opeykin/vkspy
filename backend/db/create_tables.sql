@@ -11,5 +11,6 @@ CREATE TABLE Stats(
   uid           INT         REFERENCES Users (uid),
   mobile        BOOLEAN     NOT NULL,
   app           INT         NOT NULL,
-  time          TIMESTAMPTZ NOT NULL
+  start         TIMESTAMPTZ NOT NULL,
+  finish        TIMESTAMPTZ NOT NULL
 );

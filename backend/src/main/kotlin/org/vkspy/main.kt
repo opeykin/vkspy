@@ -5,6 +5,7 @@ import org.vkspy.util.Logger
 
 fun main(args: Array<String>) {
     try {
+//        println(System.getProperty("java.class.path"))
         val accessor = VkAccessor()
         val parser = VkParser()
         val db = newVkSpyDb(Config.DbUrl, Config.DbUserName, Config.DbPassword)

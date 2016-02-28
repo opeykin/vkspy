@@ -18,7 +18,7 @@ public class VkSpyDb(val connection: Connection) {
         return list;
     }
 
-    public fun writeStatuses(statuses: Collection<OnlineStatus>) {
+    public fun writeStatuses(statuses: Collection<ResponseEntry>) {
         try {
             statuses.filter { it.online != 0 }.forEach { writeStatus(it) }
         } catch(e: Exception) {
@@ -27,14 +27,14 @@ public class VkSpyDb(val connection: Connection) {
         }
     }
 
-    private fun writeStatus(status: OnlineStatus) {
+    private fun writeStatus(responseEntry: ResponseEntry) {
         val statement = connection.createStatement()
-        var sql = createInsertRequest(status)
+        var sql = createInsertRequest(responseEntry)
         statement.executeUpdate(sql)
         statement.close()
     }
 
-    private fun createInsertRequest(s: OnlineStatus): String {
+    private fun createInsertRequest(s: ResponseEntry): String {
         return "INSERT INTO stats (uid, mobile, app, time) values (" +
                 "${s.uid}, ${s.online_mobile.toBoolean()}, ${s.online_app}, now());"
     }
